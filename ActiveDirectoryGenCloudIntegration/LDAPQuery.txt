@@ -1,0 +1,90 @@
+﻿{
+  "endpoint_config": {
+    "domains": [
+      {
+        "name": "CRKDCLVRI002.statoilfuelretail.com",
+        "ldapQuery": "(&(objectCategory=person)(objectClass=user)(mail=*.*@*)(name=*)(!userAccountControl:1.2.840.113556.1.4.803:=2)(memberof:1.2.840.113556.1.4.1941:=cn=Domain Users Office,CN=Users,DC=statoilfuelretail,DC=com))",
+        "address": "10.24.192.145"
+      }
+    ]
+  },
+  "configSyncInterval": 300,
+  "dataSyncInterval": 86400,
+  "mapping": [
+    {
+      "internal": "contactInfo.email_main",
+      "external": "User.Mail",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "general.name",
+      "external": "User.displayName",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "images.profile",
+      "external": "User.ThumbnailPhoto",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "relationships.manager",
+      "external": "User.Manager",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "general.department",
+      "external": "User.Department",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "general.title",
+      "external": "User.Title",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "contactInfo.phone_other",
+      "external": "User.telephoneNumber",
+      "direction": "ex2in"
+    },
+    {
+      "internal": "contactInfo.phone_cell",
+      "external": "User.mobile",
+      "direction": "ex2in"
+    }
+  ],
+  "enabled": true,
+  "tasks": [
+    {
+      "name": "read"
+    },
+    {
+      "name": "link_users"
+    },
+    {
+      "name": "create_users",
+      "filter": [
+        {
+          "user_state": {
+            "exists": "external_only",
+            "membership": "inclusive"
+          }
+        }
+      ],
+      "required": [
+        "User.Mail",
+        "User.Name"
+      ],
+      "direction": "ex2in",
+      "reinstate": "true"
+    },
+    {
+      "name": "delete_users",
+      "delete_missing_external_users": "true",
+      "direction": "ex2in"
+    },
+    {
+      "name": "limit_db_size",
+      "operations": "7200"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+﻿/*
+JSON file that sets field mappings. Left side represents fields in
+Genesys Cloud. Right side represents fields in Active Directory.
+*/
+
+{
+    (contactInfo.email_main)    <-  User.Mail
+    (general.name)              <-  User.displayName
+    (images.profile)            <-  User.ThumbnailPhoto
+    (relationships.manager)     <-  User.Manager
+    (general.department)        <-  User.Department
+    (general.title)             <-  User.Title
+    (contactInfo.phone_other)   <-  User.telephoneNumber
+    (contactInfo.phone_cell)    <-  User.mobile
+}
+
+
+
+
+/*
+Original inputs in case they are lost
+    (contactInfo.email_main)    <-  User.Mail
+    (general.name)              <-  User.displayName
+    (images.profile)            <-  User.ThumbnailPhoto
+    (relationships.manager)     <-  User.Manager
+    (general.department)        <-  User.Department
+    (general.title)             <-  User.Title
+    (contactInfo.phone_other)   <-  User.telephoneNumber
+    (contactInfo.phone_cell)    <-  User.mobile
+*/
